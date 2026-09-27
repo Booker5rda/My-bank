@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY Bank - Banking Portal</title>
+    <link rel="stylesheet" href="munezero.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- 1. LOGIN / REGISTER / FORGOT PASSWORD PORTAL -->
+    <!-- ========================================== -->
+    <div id="login-portal" class="auth-wrapper">
+        <div class="auth-header">
+            <img src="mybank.jpeg" alt="MY Bank Logo" class="auth-logo">
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="login-box" class="auth-box">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Please login to access your MY Bank account</p>
+
+            <form onsubmit="handleLogin(event)">
+                <label>Email Address:</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="enter your email" required>
+                </div>
+
+                <label>Password:</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="enter password" required>
+                </div>
+
+                <div class="form-links">
+                    <a href="javascript:void(0)" onclick="showAuthBox('forgot-box')">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="auth-btn">Login to Dashboard</button>
+            </form>
+
+            <div class="toggle-text">
+                Don't have an account? <a href="javascript:void(0)" onclick="showAuthBox('register-box')">Register here</a>
+            </div>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="register-box" class="auth-box hide-box">
+            <h2>Create Account</h2>
+            <p class="subtitle">Join MY Bank today</p>
+
+            <form onsubmit="handleLogin(event)">
+                <label>Full Name:</label>
+                <input type="text" placeholder="Full Name" class="input-field" required>
+
+                <label>Phone Number:</label>
+                <input type="tel" value="0790055188" class="input-field" required>
+
+                <label>Email Address:</label>
+                <input type="email" placeholder="Email" class="input-field" required>
+
+                <label>Password:</label>
+                <input type="password" placeholder="Password" class="input-field" required>
+
+                <button type="submit" class="auth-btn">Register Account</button>
+            </form>
+
+            <div class="toggle-text">
+                Already have an account? <a href="javascript:void(0)" onclick="showAuthBox('login-box')">Login here</a>
+            </div>
+        </div>
+
+        <!-- FORGOT PASSWORD FORM -->
+        <div id="forgot-box" class="auth-box hide-box">
+            <h2>Reset Password</h2>
+            <p class="subtitle">Enter your email to receive a password reset link</p>
+
+            <form onsubmit="alert('Reset link sent to your email!'); showAuthBox('login-box'); event.preventDefault();">
+                <label>Email Address:</label>
+                <input type="email" placeholder="Your registered email" class="input-field" required>
+
+                <button type="submit" class="auth-btn">Send Reset Link</button>
+            </form>
+
+            <div class="toggle-text">
+                Back to <a href="javascript:void(0)" onclick="showAuthBox('login-box')">Login</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 2. MAIN BANKING DASHBOARD -->
+    <!-- ========================================== -->
+    <div id="main-dashboard" class="dashboard-wrapper hide-box">
+
+        <!-- TOP HEADER -->
+        <header class="header">
+            <div class="logo-box">
+                <img src="mybank.jpeg" alt="MY Bank Logo" class="logo">
+            </div>
+
+            <!-- Profile link in header -->
+            <div class="user-info">
+                <a href="javascript:void(0)" onclick="openPage('profile')" class="profile-link">
+                    <i class="fas fa-user-circle avatar"></i>
+                    <span>User Profile</span>
+                </a>
+                <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </header>
+
+        <!-- MAIN CONTAINER (Sidebar + Pages) -->
+        <div class="main-container">
+
+            <!-- LEFT SIDEBAR MENU -->
+            <aside class="sidebar">
+                <ul class="nav-links">
+                    <li><a href="javascript:void(0)" onclick="openPage('home')"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="javascript:void(0)" onclick="openPage('profile')"><i class="fas fa-id-card"></i> User Profile</a></li>
+                    <li><a href="javascript:void(0)" onclick="openPage('accounts')"><i class="fas fa-wallet"></i> Accounts</a></li>
+                    
+                    <!-- Services Menu -->
+                    <li class="services-title"><i class="fas fa-concierge-bell"></i> Services</li>
+                    <li class="sub-link"><a href="javascript:void(0)" onclick="openPage('deposit')"><i class="fas fa-plus-circle"></i> Deposit</a></li>
+                    <li class="sub-link"><a href="javascript:void(0)" onclick="openPage('withdraw')"><i class="fas fa-minus-circle"></i> Withdraw</a></li>
+                    <li class="sub-link"><a href="javascript:void(0)" onclick="openPage('transfer')"><i class="fas fa-exchange-alt"></i> Online Transfer</a></li>
+
+                    <li><a href="javascript:void(0)" onclick="openPage('loans')"><i class="fas fa-hand-holding-usd"></i> Loans</a></li>
+                    <li><a href="javascript:void(0)" onclick="openPage('support')"><i class="fas fa-headset"></i> Support</a></li>
+                </ul>
+            </aside>
+
+            <!-- RIGHT SIDE CONTENT AREA -->
+            <main class="content-area">
+
+                <!-- 1. HOME VIEW -->
+                <div id="page-home" class="page-view">
+                    <h2>Dashboard Overview</h2>
+                    <div class="cards-wrapper">
+                        <div class="card card-green">
+                            <h3>Checking Account</h3>
+                            <p class="balance">$12,450.80</p>
+                            <span>Acc: **** 5678</span>
+                        </div>
+                        <div class="card card-blue">
+                            <h3>Savings Account</h3>
+                            <p class="balance">$45,210.00</p>
+                            <span>4.5% APY Savings</span>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <h3>Recent Transactions</h3>
+                        <table class="simple-table">
+                            <tr><th>Date</th><th>Description</th><th>Amount</th></tr>
+                            <tr><td>Today</td><td>Online Transfer Out</td><td class="text-red">-$250.00</td></tr>
+                            <tr><td>Yesterday</td><td>Salary Deposit</td><td class="text-green">+$3,500.00</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 2. USER PROFILE VIEW -->
+                <div id="page-profile" class="page-view hide-box">
+                    <h2>User Profile Details</h2>
+                    <div class="box">
+                        <div class="profile-header-card">
+                            <i class="fas fa-user-circle profile-large-avatar"></i>
+                            <div>
+                                <h3>Munezero Eden</h3>
+                                <p class="badge-status"><i class="fas fa-check-circle"></i> Verified Account</p>
+                                <span class="membership-level">Tier: Gold Customer</span>
+                            </div>
+                        </div>
+
+                        <form class="full-width-form">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Full Name:</label>
+                                    <input type="text" value="Munezero Eden" class="input-field" readonly>
+                                </div>
+                                <div class="form-col">
+                                    <label>Date of Birth:</label>
+                                    <input type="date" value="2000-05-14" class="input-field" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Phone Number:</label>
+                                    <input type="tel" value="0790055188" class="input-field">
+                                </div>
+                                <div class="form-col">
+                                    <label>Email Address:</label>
+                                    <input type="email" value="munezero@example.com" class="input-field">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>National ID / Passport:</label>
+                                    <input type="text" value="1 2000 8 0012345 1 20" class="input-field" readonly>
+                                </div>
+                                <div class="form-col">
+                                    <label>Residential Address:</label>
+                                    <input type="text" value="Kigali, Rwanda" class="input-field">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Emergency Contact Phone:</label>
+                                    <input type="tel" value="0790055188" class="input-field">
+                                </div>
+                                <div class="form-col">
+                                    <label>Account Status:</label>
+                                    <input type="text" value="Active / Fully Verified" class="input-field" readonly>
+                                </div>
+                            </div>
+
+                            <button type="button" class="submit-btn" onclick="alert('Profile details updated!')">Update Details</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 3. ACCOUNTS VIEW -->
+                <div id="page-accounts" class="page-view hide-box">
+                    <h2>My Accounts</h2>
+                    <div class="box">
+                        <h3>Primary Checking Account</h3>
+                        <p>Account Number: <strong>1002-3984-5678</strong></p>
+                        <p>Balance: <strong>$12,450.80</strong></p>
+                        <hr><br>
+                        <h3>High-Yield Savings Account</h3>
+                        <p>Account Number: <strong>2008-5521-9921</strong></p>
+                        <p>Balance: <strong>$45,210.00</strong></p>
+                    </div>
+                </div>
+
+                <!-- 4. DEPOSIT VIEW -->
+                <div id="page-deposit" class="page-view hide-box">
+                    <h2>Deposit Money</h2>
+                    <div class="box form-box">
+                        <form onsubmit="alert('Deposit Successful!'); openPage('home'); event.preventDefault();">
+                            <label>Select Account:</label>
+                            <select class="input-field">
+                                <option>Checking Account (**** 5678)</option>
+                                <option>Savings Account (**** 9921)</option>
+                            </select>
+
+                            <label>Deposit Method:</label>
+                            <select class="input-field">
+                                <option>Mobile Money (0790055188)</option>
+                                <option>Credit / Debit Card</option>
+                            </select>
+
+                            <label>Amount ($):</label>
+                            <input type="number" placeholder="Enter amount" class="input-field" required>
+
+                            <button type="submit" class="submit-btn">Deposit Funds</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 5. WITHDRAW VIEW -->
+                <div id="page-withdraw" class="page-view hide-box">
+                    <h2>Withdraw Money</h2>
+                    <div class="box form-box">
+                        <form onsubmit="alert('Withdrawal Request Sent!'); openPage('home'); event.preventDefault();">
+                            <label>Withdraw From:</label>
+                            <select class="input-field">
+                                <option>Checking Account ($12,450.80)</option>
+                                <option>Savings Account ($45,210.00)</option>
+                            </select>
+
+                            <label>Mobile Money Phone Number:</label>
+                            <input type="tel" value="0790055188" class="input-field" required>
+
+                            <label>Amount ($):</label>
+                            <input type="number" placeholder="Enter amount" class="input-field" required>
+
+                            <button type="submit" class="submit-btn">Withdraw Funds</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 6. TRANSFER VIEW -->
+                <div id="page-transfer" class="page-view hide-box">
+                    <h2>Online Transfer</h2>
+                    <div class="box form-box">
+                        <form onsubmit="alert('Transfer Completed!'); openPage('home'); event.preventDefault();">
+                            <label>Recipient Account / Mobile Money Number:</label>
+                            <input type="text" placeholder="Enter account or phone (e.g. 0790055188)" class="input-field" required>
+
+                            <label>Amount ($):</label>
+                            <input type="number" placeholder="Enter amount" class="input-field" required>
+
+                            <button type="submit" class="submit-btn">Send Money</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 7. LOANS VIEW -->
+                <div id="page-loans" class="page-view hide-box">
+                    <h2>Loans & Eligibility</h2>
+                    <div class="box">
+                        <p class="note"><strong>Loan Requirements:</strong> Must be at least 18 years old and a member of MY Bank for at least 6 months.</p>
+                        
+                        <form class="form-box" onsubmit="alert('Loan Application Submitted for Review!'); openPage('home'); event.preventDefault();">
+                            <label>Your Age:</label>
+                            <input type="number" min="18" max="70" placeholder="e.g. 25" class="input-field" required>
+
+                            <label>Registered Contact Phone:</label>
+                            <input type="tel" value="0790055188" class="input-field" readonly>
+
+                            <label>How long have you been in MY Bank?</label>
+                            <select class="input-field">
+                                <option>Less than 6 Months (Not Eligible)</option>
+                                <option>6 Months to 1 Year (Eligible for $5,000)</option>
+                                <option>More than 1 Year (Eligible up to $20,000)</option>
+                            </select>
+
+                            <label>Requested Loan Amount ($):</label>
+                            <input type="number" placeholder="Enter amount" class="input-field" required>
+
+                            <button type="submit" class="submit-btn">Apply For Loan</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 8. SUPPORT VIEW -->
+                <div id="page-support" class="page-view hide-box">
+                    <h2>Customer Support</h2>
+                    <div class="support-boxes">
+                        <!-- WhatsApp Box -->
+                        <div class="support-box whatsapp">
+                            <i class="fab fa-whatsapp icon"></i>
+                            <h3>WhatsApp Us</h3>
+                            <p>Direct chat: 0790055188</p>
+                            <a href="https://wa.me/250790055188" target="_blank" class="contact-btn">Chat on WhatsApp</a>
+                        </div>
+
+                        <!-- Phone Call Box -->
+                        <div class="support-box call">
+                            <i class="fas fa-phone-alt icon"></i>
+                            <h3>Call Support</h3>
+                            <p>Call line: 0790055188</p>
+                            <a href="tel:0790055188" class="contact-btn">Call Support</a>
+                        </div>
+                    </div>
+
+                    <div class="box form-box margin-top">
+                        <h3>Send a Support Ticket</h3>
+                        <form onsubmit="alert('Support ticket sent!'); event.preventDefault();">
+                            <label>Subject:</label>
+                            <input type="text" placeholder="Issue topic" class="input-field" required>
+
+                            <label>Message:</label>
+                            <textarea rows="4" placeholder="Explain your problem..." class="input-field"></textarea>
+
+                            <button type="submit" class="submit-btn">Submit Ticket</button>
+                        </form>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT PAGE SWITCHER -->
+    <script>
+        // Switch Auth Boxes (Login / Register / Forgot Password)
+        function showAuthBox(boxId) {
+            document.getElementById('login-box').classList.add('hide-box');
+            document.getElementById('register-box').classList.add('hide-box');
+            document.getElementById('forgot-box').classList.add('hide-box');
+            
+            document.getElementById(boxId).classList.remove('hide-box');
+        }
+
+        // Login Action -> Open Dashboard
+        function handleLogin(event) {
+            event.preventDefault();
+            document.getElementById('login-portal').classList.add('hide-box');
+            document.getElementById('main-dashboard').classList.remove('hide-box');
+            openPage('home');
+        }
+
+        // Logout Action -> Back to Login
+        function handleLogout() {
+            document.getElementById('main-dashboard').classList.add('hide-box');
+            document.getElementById('login-portal').classList.remove('hide-box');
+            showAuthBox('login-box');
+        }
+
+        // Switch Dashboard Pages
+        function openPage(pageName) {
+            let pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => page.classList.add('hide-box'));
+
+            let selectedPage = document.getElementById('page-' + pageName);
+            if (selectedPage) {
+                selectedPage.classList.remove('hide-box');
+            }
+        }
+    </script>
+</body>
+</html>
